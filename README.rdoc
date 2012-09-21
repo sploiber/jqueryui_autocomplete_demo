@@ -7,8 +7,7 @@ assuming Rails 3.2.3.
 
 == Getting Started
 
-1. At the command prompt, create a new Rails application:
-       <tt>rails new myapp -J --skip-bundle</tt> (where <tt>myapp</tt> is the application name)
+1. At the command prompt, create a new Rails application: <tt>rails new myapp -J --skip-bundle</tt> (where <tt>myapp</tt> is the application name)
 
 2. Change directory to <tt>myapp</tt> and edit the Gemfile. Remove sqlite3
 and replace it with mysql2; add jquery-ui-rails to the assets group; add jquery-rails at version 2.1; and do <tt>bundle install</tt>.
@@ -20,3 +19,20 @@ and replace it with mysql2; add jquery-ui-rails to the assets group; add jquery-
 5. Add data to db/seeds.rb, in the form <tt>Brand.create(:name => "Alpha")</tt>.
 
 6. Run <tt>rake db:migrate</tt>.
+
+7. Run <tt>rake db:seed</tt>.
+
+8. Run <tt>rails generate controller members show</tt>.
+
+9. Add the following to the members_controller:
+
+    class MembersController < ApplicationController
+      def show
+        @names = Brand.all.map(&:name)
+        respond_to do |format|
+          format.html
+          format.json { render :json => @names }
+        end
+      end
+    end
+
