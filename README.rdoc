@@ -1,0 +1,22 @@
+== jqueryui_autocomplete_demo
+
+This demo enables a JQueryUI Autocomplete box on a Ruby on Rails/Rails 3
+app. I had wanted to use the rails3-jquery-autocomplete gem, but was not able
+to get it running. There are many steps which must be followed here. I am
+assuming Rails 3.2.3.
+
+== Getting Started
+
+1. At the command prompt, create a new Rails application:
+       <tt>rails new myapp -J --skip-bundle</tt> (where <tt>myapp</tt> is the application name)
+
+2. Change directory to <tt>myapp</tt> and edit the Gemfile. Remove sqlite3
+and replace it with mysql2; add jquery-ui-rails to the assets group; add jquery-rails at version 2.1; and do <tt>bundle install</tt>.
+
+3. Edit the automatically generated database.yml file to use MySQL2 instead of sqlite3.
+
+4. Run <tt>rails g model brand name</tt>.
+
+5. Add data to db/seeds.rb, in the form <tt>Brand.create(:name => "Alpha")</tt>.
+
+6. Run <tt>rake db:migrate</tt>.
