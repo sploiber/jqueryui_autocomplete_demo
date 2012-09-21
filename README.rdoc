@@ -9,8 +9,7 @@ assuming Rails 3.2.3.
 
 1. At the command prompt, create a new Rails application: <tt>rails new myapp -J --skip-bundle</tt> (where <tt>myapp</tt> is the application name)
 
-2. Change directory to <tt>myapp</tt> and edit the Gemfile. Remove sqlite3
-and replace it with mysql2; add jquery-ui-rails to the assets group; add jquery-rails at version 2.1; and do <tt>bundle install</tt>.
+2. Change directory to <tt>myapp</tt> and edit the Gemfile. Remove sqlite3 and replace it with mysql2; add jquery-ui-rails to the assets group; add jquery-rails at version 2.1; and do <tt>bundle install</tt>.
 
 3. Edit the automatically generated database.yml file to use MySQL2 instead of sqlite3.
 
@@ -36,3 +35,45 @@ and replace it with mysql2; add jquery-ui-rails to the assets group; add jquery-
       end
     end
 
+The effect of this is to produce an array containing the data which the user will choose from in the autocomplete box; and it indicates that this method will respond to JSON by producing the array.
+
+10. Add show.html.erb to views/members as follows:
+
+    <h1>Welcome</h1>
+    <%= form_tag :method => :get do %>
+    <%= text_field_tag :brand_name, nil, :class => 'brand_name' %>
+    <% end %>
+    
+which will identify the text box for autocomplete.
+
+11. Add show.js.erb to views/members as follows:
+
+<%= raw @names %>
+
+12. Add the following to app/assets/javascripts/application.js:
+
+    //= require jquery
+    //= require jquery_ujs
+    //= jquery.ui.all
+
+    $(function() {
+
+      $('.brand_name').autocomplete({
+        source: '/members/show.json'
+      });
+    });
+
+13. Add the following to app/assets/stylesheets/application.css:
+
+    *= require jquery.ui.all
+
+14. Delete public/index.html.
+
+15. Change the routes to include:
+
+    get "members/show"
+    root :to => 'members@show"
+
+16. Start the rails server.
+
+17. Browse to http://localhost:3000 and make sure that the autocomplete is working.
