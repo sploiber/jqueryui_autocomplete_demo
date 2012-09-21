@@ -48,7 +48,7 @@ which will identify the text box for autocomplete.
 
 11. Add show.js.erb to views/members as follows:
 
-<%= raw @names %>
+    <%= raw @names %>
 
 12. Add the following to app/assets/javascripts/application.js:
 
